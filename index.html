@@ -4,41 +4,50 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="color-scheme" content="light dark" />
-  <meta name="theme-color" content="#f4f1eb" media="(prefers-color-scheme: light)" />
-  <meta name="theme-color" content="#12110f" media="(prefers-color-scheme: dark)" />
-  <link rel="icon" href="data:," />
+  <meta name="theme-color" content="#fbfaf6" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#111b33" media="(prefers-color-scheme: dark)" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <title>48-Hour Landing Pages</title>
+  <title>PageCraft — Clear websites, fast</title>
   <style>
     :root {
       color-scheme: light dark;
-      --paper: #f4f1eb;
-      --paper-2: #ebe7df;
-      --ink: #171612;
-      --muted: #615e56;
-      --line: #bbb5aa;
-      --line-strong: #6e6a62;
-      --accent: #e44b25;
-      --accent-ink: #fffaf4;
-      --acid: #d5e62f;
-      --shadow: rgba(37, 30, 21, .14);
-      --success: #247a4a;
+      --paper: #fbfaf6;
+      --paper-2: #f1f8ff;
+      --ink: #13224a;
+      --muted: #53617f;
+      --blue: #47a8ff;
+      --blue-soft: #d9eeff;
+      --blue-deep: #1569c7;
+      --peach: #ffb29b;
+      --pink: #ff8dad;
+      --mint: #bcebd2;
+      --line: #b9c9df;
+      --line-strong: #7690b3;
+      --white: #ffffff;
+      --danger: #b54444;
+      --success: #217353;
+      --shadow: 0 18px 42px rgba(27, 67, 112, .13);
     }
     @media (prefers-color-scheme: dark) {
       :root {
-        --paper: #12110f;
-        --paper-2: #1c1a17;
-        --ink: #f4f0e8;
-        --muted: #bcb6aa;
-        --line: #4b4841;
-        --line-strong: #8e897e;
-        --accent: #ff6844;
-        --accent-ink: #15110f;
-        --acid: #d9e94d;
-        --shadow: rgba(0, 0, 0, .35);
-        --success: #65c58d;
+        --paper: #111b33;
+        --paper-2: #172541;
+        --ink: #eff7ff;
+        --muted: #b5c5db;
+        --blue: #61b7ff;
+        --blue-soft: #203e5f;
+        --blue-deep: #8dcbff;
+        --peach: #c97864;
+        --pink: #d7658c;
+        --mint: #3a7760;
+        --line: #39506f;
+        --line-strong: #7087a6;
+        --white: #16223b;
+        --danger: #ffaaaa;
+        --success: #7bd2ad;
+        --shadow: 0 20px 46px rgba(0, 0, 0, .28);
       }
     }
 
@@ -47,716 +56,786 @@
     body {
       margin: 0;
       min-width: 320px;
+      overflow-x: hidden;
       background: var(--paper);
       color: var(--ink);
       font-family: "Manrope", sans-serif;
       font-size: 16px;
-      line-height: 1.55;
-      overflow-x: hidden;
+      line-height: 1.6;
+      -webkit-user-select: text;
+      user-select: text;
     }
-    button, input, textarea, select { font: inherit; }
+    button, input, textarea { font: inherit; }
     button, a { -webkit-tap-highlight-color: transparent; }
     a { color: inherit; }
     button { color: inherit; }
-    ::selection { background: var(--acid); color: #171612; }
+    ::selection { background: var(--peach); color: #13224a; }
+    :focus-visible { outline: 3px solid var(--pink); outline-offset: 3px; }
 
     .shell { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
-    .mono { font-family: "IBM Plex Mono", monospace; }
-    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    .section { padding: 96px 0; position: relative; }
+    .section-kicker {
+      margin: 0 0 10px;
+      color: var(--blue-deep);
+      font: 500 12px/1.2 "IBM Plex Mono", monospace;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+    }
+    .section-title {
+      margin: 0;
+      font-size: clamp(36px, 5.4vw, 68px);
+      line-height: 1.02;
+      letter-spacing: -.055em;
+      max-width: 780px;
+    }
+    .section-lead { max-width: 650px; margin: 18px 0 0; color: var(--muted); font-size: 18px; }
 
-    .topbar {
-      position: relative;
-      z-index: 5;
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: color-mix(in srgb, var(--paper) 94%, transparent);
       border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(12px);
     }
-    .topbar-inner {
-      min-height: 68px;
-      display: flex;
+    .header-inner { min-height: 70px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .wordmark {
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 21px;
+      letter-spacing: -.04em;
+    }
+    .wordmark em { color: var(--blue-deep); font-style: normal; }
+    .nav { display: flex; align-items: center; gap: 27px; }
+    .nav a { text-decoration: none; font-weight: 700; font-size: 14px; }
+    .nav a:hover { color: var(--blue-deep); }
+    .header-cta {
+      min-height: 40px;
+      padding: 0 17px;
+      display: inline-flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-    }
-    .availability {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 12px;
-      letter-spacing: .02em;
-      color: var(--muted);
-    }
-    .availability::before {
-      content: "";
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: var(--success);
-      box-shadow: 0 0 0 4px color-mix(in srgb, var(--success) 15%, transparent);
-    }
-    .nav { display: flex; align-items: center; gap: 28px; }
-    .nav a { text-decoration: none; font-size: 14px; font-weight: 600; }
-    .nav a:hover { text-decoration: underline; text-underline-offset: 4px; }
-    .nav .nav-cta {
+      justify-content: center;
+      border: 1px solid var(--ink);
+      border-radius: 10px;
       background: var(--ink);
       color: var(--paper);
-      padding: 10px 14px;
-      text-decoration: none;
-    }
-    .nav .nav-cta:hover { text-decoration: none; background: var(--accent); color: var(--accent-ink); }
-
-    .hero {
-      display: grid;
-      grid-template-columns: 1.08fr .92fr;
-      min-height: 670px;
-      border-bottom: 1px solid var(--line);
-    }
-    .hero-copy {
-      padding: 78px 56px 72px 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-    .eyebrow {
-      width: fit-content;
-      border: 1px solid var(--line-strong);
-      padding: 7px 10px;
-      margin-bottom: 26px;
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 12px;
-      background: var(--paper);
-    }
-    h1 {
-      font-size: clamp(54px, 7.2vw, 108px);
-      line-height: .91;
-      letter-spacing: -.065em;
-      margin: 0;
-      max-width: 760px;
+      cursor: pointer;
       font-weight: 800;
     }
-    .hero-copy > p {
-      max-width: 590px;
-      margin: 32px 0 0;
-      font-size: clamp(18px, 2vw, 22px);
-      line-height: 1.45;
-      color: var(--muted);
+    .header-cta:hover { background: var(--blue-deep); border-color: var(--blue-deep); }
+
+    .hero {
+      min-height: 700px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(390px, .98fr);
+      gap: 70px;
+      align-items: center;
+      padding: 92px 0 104px;
+      position: relative;
     }
-    .actions { display: flex; align-items: center; gap: 18px; margin-top: 36px; flex-wrap: wrap; }
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      right: -30px;
+      top: 62px;
+      border-radius: 53% 47% 66% 34% / 43% 59% 41% 57%;
+      background: var(--pink);
+      opacity: .48;
+      transform: rotate(14deg);
+    }
+    .hero-copy { position: relative; z-index: 2; }
+    .hero-note {
+      width: fit-content;
+      margin: 0 0 22px;
+      color: var(--blue-deep);
+      font: 500 12px/1.2 "IBM Plex Mono", monospace;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+    .hero h1 {
+      margin: 0;
+      max-width: 690px;
+      font-size: clamp(58px, 8vw, 104px);
+      line-height: .91;
+      letter-spacing: -.072em;
+      font-weight: 800;
+    }
+    .hero h1 span {
+      position: relative;
+      display: inline-block;
+      padding-bottom: .12em;
+      line-height: .97;
+      z-index: 0;
+    }
+    .hero h1 span::after {
+      content: "";
+      position: absolute;
+      left: -1%;
+      right: -2%;
+      bottom: .02em;
+      height: .11em;
+      z-index: -1;
+      border-radius: 60% 40% 55% 45%;
+      background: var(--pink);
+      transform: rotate(-1.2deg);
+    }
+    .hero-copy > p { max-width: 580px; margin: 30px 0 0; color: var(--muted); font-size: clamp(18px, 2vw, 22px); }
+    .button-row { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-top: 34px; }
     .button {
-      border: 1px solid var(--ink);
-      background: var(--accent);
-      color: var(--accent-ink);
       min-height: 52px;
       padding: 0 20px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
+      border: 1px solid var(--ink);
+      border-radius: 12px;
+      background: var(--ink);
+      color: var(--paper);
       font-weight: 800;
       text-decoration: none;
       cursor: pointer;
-      box-shadow: 4px 4px 0 var(--ink);
-      transition: transform 130ms ease, box-shadow 130ms ease;
+      box-shadow: 4px 4px 0 var(--blue);
+      transition: transform 130ms ease, box-shadow 130ms ease, background 130ms ease;
     }
-    .button:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--ink); }
+    .button:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--blue); background: var(--blue-deep); }
     .button:active { transform: translate(4px, 4px); box-shadow: none; }
-    .button.secondary { background: transparent; color: var(--ink); box-shadow: none; border-color: var(--line-strong); font-weight: 600; }
-    .button.secondary:hover { transform: none; background: var(--paper-2); }
-    .button svg { width: 18px; height: 18px; }
-    .micro { font-size: 12px; color: var(--muted); font-family: "IBM Plex Mono", monospace; }
+    .button.secondary { background: transparent; color: var(--ink); box-shadow: none; border-color: var(--line-strong); }
+    .button.secondary:hover { transform: none; background: var(--blue-soft); }
+    .button i, .button svg { width: 18px; height: 18px; }
 
-    .hero-visual {
-      border-left: 1px solid var(--line);
-      padding: 76px 0 72px 54px;
-      display: flex;
-      align-items: center;
-      position: relative;
-    }
-    .browser {
-      width: 100%;
-      border: 1px solid var(--ink);
-      background: var(--paper-2);
-      box-shadow: 15px 15px 0 var(--accent);
-    }
-    .browser-chrome {
-      height: 43px;
-      border-bottom: 1px solid var(--ink);
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      padding: 0 14px;
-    }
-    .dot { width: 9px; height: 9px; border: 1px solid var(--ink); border-radius: 50%; }
-    .url-line { margin-left: 8px; width: 48%; height: 7px; background: var(--line); }
-    .mock {
-      min-height: 408px;
-      padding: 36px 34px;
-      display: grid;
-      grid-template-columns: 1fr .7fr;
-      gap: 26px;
-      background:
-        linear-gradient(var(--line), var(--line)) 34px calc(100% - 39px) / calc(100% - 68px) 1px no-repeat,
-        var(--paper);
-    }
-    .mock-kicker { width: 88px; height: 10px; background: var(--accent); margin-bottom: 30px; }
-    .mock-title { font-size: clamp(30px, 4vw, 52px); line-height: .96; letter-spacing: -.06em; font-weight: 800; }
-    .mock-lines { display: grid; gap: 9px; margin-top: 25px; }
-    .mock-lines span { display: block; width: 88%; height: 6px; background: var(--line); }
-    .mock-lines span:nth-child(2) { width: 74%; }
-    .mock-button { margin-top: 30px; width: 116px; height: 39px; background: var(--ink); }
-    .mock-art {
-      align-self: stretch;
-      border: 1px solid var(--ink);
-      background: var(--acid);
-      display: grid;
-      place-items: center;
-      min-height: 260px;
-      position: relative;
+    .hero-art { position: relative; min-height: 500px; }
+    .hero-card {
+      position: absolute;
+      inset: 45px 0 50px 24px;
+      border: 2px solid var(--ink);
+      border-radius: 28px 19px 26px 22px;
+      background: var(--white);
+      box-shadow: var(--shadow);
+      transform: rotate(-1.2deg);
       overflow: hidden;
     }
-    .mock-art::before, .mock-art::after { content: ""; position: absolute; border: 1px solid var(--ink); }
-    .mock-art::before { width: 120px; height: 120px; border-radius: 50%; top: 16%; left: -25px; background: var(--paper); }
-    .mock-art::after { width: 100px; height: 190px; right: -15px; bottom: -50px; transform: rotate(21deg); background: var(--accent); }
-    .mock-stamp {
+    .hero-card-top { height: 58px; padding: 0 20px; border-bottom: 2px solid var(--ink); display: flex; align-items: center; gap: 9px; }
+    .hero-card-top span { width: 10px; height: 10px; border: 2px solid var(--ink); border-radius: 50%; }
+    .hero-card-inner { padding: 34px; display: grid; grid-template-columns: 1.08fr .92fr; gap: 22px; }
+    .mini-label { width: 86px; height: 10px; border-radius: 8px; background: var(--blue); }
+    .mini-title { margin-top: 24px; font-size: clamp(28px, 3.3vw, 49px); line-height: .95; letter-spacing: -.055em; font-weight: 800; }
+    .mini-lines { display: grid; gap: 9px; margin-top: 25px; }
+    .mini-lines span { height: 7px; border-radius: 6px; background: var(--line); }
+    .mini-lines span:nth-child(2) { width: 74%; }
+    .mini-button { width: 105px; height: 38px; margin-top: 28px; border-radius: 9px; background: var(--ink); }
+    .mini-art { min-height: 285px; position: relative; border: 2px solid var(--ink); border-radius: 21px 13px 24px 15px; background: var(--blue-soft); overflow: hidden; }
+    .mini-art::before {
+      content: "";
       position: absolute;
-      z-index: 2;
-      transform: rotate(-9deg);
-      background: var(--paper);
-      border: 1px solid var(--ink);
-      padding: 9px 12px;
-      font: 500 11px "IBM Plex Mono", monospace;
+      width: 145px;
+      height: 145px;
+      left: -42px;
+      top: 30px;
+      border: 2px solid var(--ink);
+      border-radius: 50%;
+      background: var(--peach);
     }
-    .turnaround {
+    .mini-art::after {
+      content: "";
       position: absolute;
-      right: -18px;
-      top: 34px;
-      background: var(--ink);
-      color: var(--paper);
-      padding: 13px 16px;
-      transform: rotate(3deg);
-      font: 500 12px "IBM Plex Mono", monospace;
+      width: 115px;
+      height: 210px;
+      right: -20px;
+      bottom: -60px;
+      border: 2px solid var(--ink);
+      border-radius: 55px 18px 30px 18px;
+      background: var(--pink);
+      transform: rotate(17deg);
+    }
+    .sketch-arrow {
+      position: absolute;
+      width: 148px;
+      height: 92px;
+      left: -18px;
+      top: 0;
+      color: var(--blue-deep);
+      transform: rotate(-5deg);
+    }
+    .sketch-arrow path { fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-dasharray: 8 8; }
+    .sketch-arrow polygon { fill: currentColor; }
+    .sticky-note {
+      position: absolute;
+      right: -12px;
+      bottom: 18px;
+      width: 154px;
+      padding: 21px 18px;
+      border: 2px solid var(--ink);
+      background: var(--peach);
+      font: 500 13px/1.35 "IBM Plex Mono", monospace;
+      transform: rotate(5deg);
+      box-shadow: 5px 6px 0 color-mix(in srgb, var(--ink) 18%, transparent);
+    }
+    .dot-motif {
+      position: absolute;
+      width: 116px;
+      height: 86px;
+      right: 6px;
+      top: 6px;
+      opacity: .75;
+      background-image: radial-gradient(circle, var(--blue-deep) 2px, transparent 2.2px);
+      background-size: 16px 16px;
     }
 
-    .marquee { border-bottom: 1px solid var(--line); background: var(--ink); color: var(--paper); overflow: hidden; }
-    .marquee-track { display: flex; width: max-content; animation: crawl 26s linear infinite; }
-    .marquee span { padding: 15px 24px; font: 500 12px "IBM Plex Mono", monospace; white-space: nowrap; }
-    .marquee b { color: var(--acid); margin-left: 48px; }
-    @keyframes crawl { to { transform: translateX(-50%); } }
+    .strip { border-block: 1px solid var(--line); background: var(--blue-soft); }
+    .strip-inner { min-height: 56px; display: flex; align-items: center; justify-content: center; gap: 24px; font-weight: 800; color: var(--blue-deep); }
+    .strip-divider { width: 4px; height: 4px; border-radius: 50%; background: var(--line-strong); flex: 0 0 auto; }
 
-    section { border-bottom: 1px solid var(--line); }
-    .section-grid { display: grid; grid-template-columns: 280px 1fr; }
-    .section-label { padding: 64px 40px 64px 0; font: 500 13px "IBM Plex Mono", monospace; color: var(--muted); }
-    .section-body { border-left: 1px solid var(--line); padding: 64px 0 72px 54px; }
-    h2 { font-size: clamp(36px, 5vw, 66px); line-height: .98; letter-spacing: -.055em; margin: 0; max-width: 780px; }
-    .section-lead { max-width: 720px; margin: 22px 0 0; color: var(--muted); font-size: 18px; }
-
-    .deliverables { margin-top: 45px; border-top: 1px solid var(--line); }
-    .deliverable {
+    .works-wrap { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 70px; }
+    .side-heading { position: sticky; top: 105px; align-self: start; }
+    .side-heading .section-title { font-size: clamp(42px, 5vw, 64px); }
+    .feature-stack { display: grid; gap: 18px; }
+    .feature-panel {
+      min-height: 205px;
+      padding: 30px;
       display: grid;
-      grid-template-columns: 54px 1fr auto;
-      gap: 18px;
-      align-items: start;
-      border-bottom: 1px solid var(--line);
-      padding: 25px 0;
+      grid-template-columns: 92px 1fr;
+      gap: 28px;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 24px 18px 28px 16px;
+      background: var(--white);
     }
-    .num { color: var(--accent); font: 500 12px "IBM Plex Mono", monospace; padding-top: 5px; }
-    .deliverable h3 { margin: 0; font-size: 20px; letter-spacing: -.02em; }
-    .deliverable p { margin: 5px 0 0; color: var(--muted); max-width: 550px; }
-    .status { font: 500 11px "IBM Plex Mono", monospace; border: 1px solid var(--line); padding: 6px 8px; white-space: nowrap; }
+    .feature-panel:nth-child(2) { margin-left: 34px; }
+    .feature-panel:nth-child(3) { margin-right: 34px; }
+    .feature-icon {
+      width: 82px;
+      height: 82px;
+      display: grid;
+      place-items: center;
+      color: var(--blue-deep);
+      border: 2px dashed var(--blue);
+      border-radius: 45% 55% 42% 58% / 53% 40% 60% 47%;
+      background: var(--blue-soft);
+      transform: rotate(-3deg);
+    }
+    .feature-panel:nth-child(2) .feature-icon { transform: rotate(3deg); background: color-mix(in srgb, var(--peach) 44%, var(--white)); }
+    .feature-panel:nth-child(3) .feature-icon { transform: rotate(-5deg); background: color-mix(in srgb, var(--mint) 58%, var(--white)); }
+    .feature-icon svg { width: 42px; height: 42px; stroke-width: 1.7; }
+    .feature-panel h3 { margin: 0 0 8px; font-size: 27px; letter-spacing: -.035em; }
+    .feature-panel p { margin: 0; color: var(--muted); }
 
-    .process-wrap { margin-top: 44px; display: grid; grid-template-columns: repeat(3, 1fr); }
-    .step { padding: 28px; min-height: 245px; border: 1px solid var(--line); border-right: 0; display: flex; flex-direction: column; }
-    .step:last-child { border-right: 1px solid var(--line); }
-    .step-mark { font: 500 11px "IBM Plex Mono", monospace; color: var(--accent); }
-    .step h3 { margin: auto 0 8px; font-size: 22px; letter-spacing: -.03em; }
-    .step p { margin: 0; color: var(--muted); font-size: 14px; }
+    .process-section { background: var(--ink); color: var(--paper); overflow: hidden; }
+    .process-section .section-kicker { color: var(--blue); }
+    .process-section .section-lead { color: color-mix(in srgb, var(--paper) 72%, transparent); }
+    .process-grid { margin-top: 54px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; position: relative; }
+    .process-step { position: relative; min-height: 255px; padding: 24px 8px 20px 0; }
+    .process-step + .process-step::before {
+      content: "";
+      position: absolute;
+      width: 58px;
+      left: -46px;
+      top: 48px;
+      border-top: 2px dashed var(--blue);
+      transform: rotate(-4deg);
+    }
+    .process-step + .process-step::after {
+      content: "";
+      position: absolute;
+      left: 4px;
+      top: 42px;
+      border-left: 8px solid var(--blue);
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+      transform: rotate(-4deg);
+    }
+    .number {
+      width: 64px;
+      height: 64px;
+      display: grid;
+      place-items: center;
+      border: 2px solid var(--paper);
+      border-radius: 50%;
+      background: var(--blue-deep);
+      font: 500 18px "IBM Plex Mono", monospace;
+    }
+    .process-step:nth-child(2) .number { background: var(--pink); color: #13224a; }
+    .process-step:nth-child(3) .number { background: var(--peach); color: #13224a; }
+    .process-step h3 { margin: 26px 0 9px; font-size: 27px; letter-spacing: -.035em; }
+    .process-step p { margin: 0; color: color-mix(in srgb, var(--paper) 72%, transparent); }
 
-    .outcomes { margin-top: 44px; border: 1px solid var(--line); }
-    .outcome { display: grid; grid-template-columns: 160px 1fr; gap: 28px; padding: 28px; border-bottom: 1px solid var(--line); }
-    .outcome:last-child { border-bottom: 0; }
-    .outcome-tag { color: var(--accent); font: 500 11px "IBM Plex Mono", monospace; padding-top: 4px; }
-    .outcome h3 { margin: 0 0 7px; font-size: 22px; letter-spacing: -.03em; }
-    .outcome p { margin: 0; color: var(--muted); max-width: 650px; }
+    .portfolio-section { overflow: hidden; }
+    .portfolio-grid { margin-top: 50px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .project-card {
+      border: 1px solid var(--line);
+      border-radius: 24px 17px 25px 15px;
+      overflow: hidden;
+      background: var(--white);
+      transition: transform 150ms ease, box-shadow 150ms ease;
+    }
+    .project-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+    .project-shot { min-height: 215px; padding: 22px; position: relative; border-bottom: 1px solid var(--line); overflow: hidden; }
+    .project-card:nth-child(1) .project-shot { background: var(--blue-soft); }
+    .project-card:nth-child(2) .project-shot { background: color-mix(in srgb, var(--peach) 48%, var(--white)); }
+    .project-card:nth-child(3) .project-shot { background: color-mix(in srgb, var(--mint) 64%, var(--white)); }
+    .project-window { height: 170px; border: 2px solid var(--ink); border-radius: 14px 10px 17px 9px; background: var(--white); transform: rotate(-1.5deg); overflow: hidden; }
+    .project-card:nth-child(2) .project-window { transform: rotate(1.8deg); }
+    .project-card:nth-child(3) .project-window { transform: rotate(-2.1deg); }
+    .project-bar { height: 27px; border-bottom: 2px solid var(--ink); background: var(--paper-2); }
+    .project-layout { padding: 19px; display: grid; grid-template-columns: 1fr 72px; gap: 14px; }
+    .project-copy strong { display: block; width: 76%; height: 10px; background: var(--ink); border-radius: 8px; }
+    .project-copy span { display: block; height: 6px; margin-top: 10px; background: var(--line); border-radius: 7px; }
+    .project-copy span:nth-child(3) { width: 68%; }
+    .project-art { min-height: 94px; border: 2px solid var(--ink); border-radius: 44% 56% 38% 62%; background: var(--blue); }
+    .project-card:nth-child(2) .project-art { background: var(--pink); }
+    .project-card:nth-child(3) .project-art { background: var(--peach); }
+    .project-info { padding: 23px; }
+    .project-info h3 { margin: 0; font-size: 21px; letter-spacing: -.025em; }
+    .metric { display: inline-flex; align-items: center; gap: 7px; margin-top: 13px; color: var(--blue-deep); font: 500 12px "IBM Plex Mono", monospace; }
+    .metric svg { width: 16px; height: 16px; }
+    .sample-note { margin: 13px 0 0; color: var(--muted); font-size: 12px; }
 
-    .price-panel { margin-top: 44px; display: grid; grid-template-columns: 1.1fr .9fr; border: 1px solid var(--ink); }
-    .price-main { padding: 38px; background: var(--ink); color: var(--paper); }
-    .price-main .mono { font-size: 12px; opacity: .72; }
-    .price { margin: 20px 0 8px; font-size: clamp(64px, 9vw, 112px); line-height: .88; letter-spacing: -.075em; font-weight: 800; }
-    .price-note { color: color-mix(in srgb, var(--paper) 72%, transparent); }
-    .price-details { padding: 38px; background: var(--paper-2); display: flex; flex-direction: column; }
-    .price-details ul { list-style: none; padding: 0; margin: 0 0 28px; }
-    .price-details li { padding: 12px 0; border-bottom: 1px solid var(--line); display: flex; gap: 10px; }
-    .price-details li::before { content: "↳"; color: var(--accent); font-family: "IBM Plex Mono", monospace; }
-    .price-details .button { margin-top: auto; width: 100%; }
+    .price-card {
+      margin-top: 52px;
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      border: 2px solid var(--ink);
+      border-radius: 28px 18px 30px 16px;
+      background: var(--white);
+      overflow: hidden;
+      box-shadow: 10px 10px 0 var(--blue-soft);
+    }
+    .price-copy { padding: 42px; }
+    .price-eyebrow { color: var(--blue-deep); font: 500 12px "IBM Plex Mono", monospace; letter-spacing: .06em; }
+    .price { margin: 17px 0 6px; font-size: clamp(68px, 9vw, 110px); line-height: .86; letter-spacing: -.08em; font-weight: 800; }
+    .price-note { color: var(--muted); }
+    .price-copy .button { margin-top: 30px; }
+    .price-list { margin: 0; padding: 38px 42px; list-style: none; border-left: 2px dashed var(--line); background: var(--paper-2); }
+    .price-list li { display: flex; gap: 12px; align-items: flex-start; padding: 13px 0; border-bottom: 1px solid var(--line); }
+    .price-list li:last-child { border-bottom: 0; }
+    .price-list svg { width: 19px; height: 19px; margin-top: 3px; color: var(--blue-deep); flex: 0 0 auto; }
+    .scope-grid { margin-top: 28px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .scope-card { padding: 26px; border: 1px solid var(--line); background: var(--white); }
+    .scope-card:nth-child(1) { border-radius: 18px 10px 14px 8px; }
+    .scope-card:nth-child(2) { border-radius: 9px 18px 10px 15px; }
+    .scope-card:nth-child(3) { border-radius: 15px 8px 18px 11px; }
+    .scope-card .scope-icon { width: 38px; height: 38px; display: grid; place-items: center; margin-bottom: 18px; border-radius: 9px; background: var(--blue-soft); color: var(--blue-deep); }
+    .scope-card:nth-child(2) .scope-icon { background: color-mix(in srgb, var(--peach) 35%, var(--white)); }
+    .scope-card:nth-child(3) .scope-icon { background: color-mix(in srgb, var(--mint) 48%, var(--white)); }
+    .scope-card .scope-icon svg { width: 20px; height: 20px; }
+    .scope-card h3 { margin: 0 0 9px; font-size: 20px; letter-spacing: -.025em; }
+    .scope-card p { margin: 0; color: var(--muted); font-size: 14px; }
+    .scope-card ul { margin: 14px 0 0; padding-left: 18px; color: var(--muted); font-size: 14px; }
+    .scope-card li + li { margin-top: 7px; }
 
-    .fit-grid { margin-top: 44px; display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); }
-    .fit { background: var(--paper); padding: 30px; }
-    .fit h3 { margin: 0 0 20px; font-size: 22px; }
-    .fit ul { list-style: none; padding: 0; margin: 0; }
-    .fit li { padding: 9px 0; color: var(--muted); }
-    .fit.good li::before { content: "+"; color: var(--success); margin-right: 12px; font-family: "IBM Plex Mono", monospace; }
-    .fit.bad li::before { content: "−"; color: var(--accent); margin-right: 12px; font-family: "IBM Plex Mono", monospace; }
+    .faq-wrap { display: grid; grid-template-columns: minmax(220px, .7fr) minmax(0, 1.3fr); gap: 70px; align-items: start; }
+    .faq-list { border-top: 1px solid var(--line-strong); }
+    .faq-item { padding: 23px 0; border-bottom: 1px solid var(--line); }
+    .faq-item h3 { margin: 0 0 8px; font-size: 19px; letter-spacing: -.025em; }
+    .faq-item p { margin: 0; color: var(--muted); }
 
-    .next-steps { margin-top: 44px; counter-reset: next; border-top: 1px solid var(--line); }
-    .next-step { counter-increment: next; display: grid; grid-template-columns: 58px 1fr auto; gap: 18px; align-items: center; padding: 24px 0; border-bottom: 1px solid var(--line); }
-    .next-step::before { content: "0" counter(next); color: var(--accent); font: 500 12px "IBM Plex Mono", monospace; }
-    .next-step h3 { margin: 0 0 4px; font-size: 19px; letter-spacing: -.02em; }
-    .next-step p { margin: 0; color: var(--muted); }
-    .next-time { font: 500 11px "IBM Plex Mono", monospace; color: var(--muted); white-space: nowrap; }
-    .next-action { margin-top: 30px; display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
-
-    .faq { margin-top: 40px; }
-    details { border-top: 1px solid var(--line); }
-    details:last-child { border-bottom: 1px solid var(--line); }
-    summary { list-style: none; cursor: pointer; padding: 22px 4px; font-weight: 700; display: flex; justify-content: space-between; gap: 20px; }
-    summary::-webkit-details-marker { display: none; }
-    summary::after { content: "+"; color: var(--accent); font: 500 20px "IBM Plex Mono", monospace; }
-    details[open] summary::after { content: "−"; }
-    details p { margin: -4px 0 24px; color: var(--muted); max-width: 720px; }
-
-    .closing { padding: 90px 0 105px; display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: end; }
-    .closing h2 { max-width: 790px; }
-    .closing p { color: var(--muted); margin: 22px 0 0; max-width: 620px; }
-    .closing .button { min-width: 200px; }
-    .closing-actions { display: flex; flex-direction: column; align-items: stretch; gap: 13px; }
-    .contact-email { font: 500 12px "IBM Plex Mono", monospace; color: var(--muted); text-align: center; overflow-wrap: anywhere; }
-    .contact-email:hover { color: var(--ink); }
-    footer { padding: 24px 0 calc(24px + env(safe-area-inset-bottom)); display: flex; justify-content: space-between; gap: 20px; font: 400 11px "IBM Plex Mono", monospace; color: var(--muted); }
+    .closing { padding: 86px 0 100px; border-top: 1px solid var(--line); position: relative; overflow: hidden; }
+    .closing-inner { display: grid; grid-template-columns: 1fr auto; gap: 46px; align-items: center; }
+    .closing blockquote { margin: 0; font-size: clamp(28px, 4.2vw, 53px); line-height: 1.12; letter-spacing: -.045em; font-weight: 800; max-width: 780px; }
+    .closing cite { display: block; margin-top: 16px; color: var(--muted); font: 500 12px "IBM Plex Mono", monospace; font-style: normal; }
+    .contact-block { display: flex; flex-direction: column; gap: 13px; min-width: 230px; }
+    .contact-link { color: var(--blue-deep); font-size: 13px; overflow-wrap: anywhere; text-align: center; text-underline-offset: 3px; }
+    .closing .blob { position: absolute; width: 160px; height: 160px; right: -65px; bottom: -70px; border-radius: 50% 38% 61% 42%; background: var(--peach); opacity: .6; }
+    footer { padding: 24px 0 calc(24px + env(safe-area-inset-bottom)); border-top: 1px solid var(--line); color: var(--muted); font: 400 11px "IBM Plex Mono", monospace; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
 
     dialog {
-      width: min(720px, calc(100% - 28px));
+      width: min(690px, calc(100% - 28px));
       max-height: min(820px, calc(100dvh - 28px));
       padding: 0;
-      border: 1px solid var(--ink);
+      border: 2px solid var(--ink);
+      border-radius: 24px 16px 25px 15px;
       background: var(--paper);
       color: var(--ink);
-      box-shadow: 12px 12px 0 var(--accent);
+      box-shadow: 10px 10px 0 var(--blue);
     }
-    dialog::backdrop { background: rgba(0,0,0,.64); }
-    .dialog-head { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 22px 24px; border-bottom: 1px solid var(--line); }
-    .dialog-head h2 { font-size: 27px; letter-spacing: -.04em; }
-    .close { width: 40px; height: 40px; border: 1px solid var(--line); background: transparent; cursor: pointer; font-size: 22px; }
-    .close:hover { background: var(--paper-2); }
+    dialog::backdrop { background: rgba(10, 22, 49, .68); }
+    .dialog-head { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 21px 24px; border-bottom: 1px solid var(--line); }
+    .dialog-head h2 { margin: 0; font-size: 28px; letter-spacing: -.04em; }
+    .icon-button { width: 42px; height: 42px; border: 1px solid var(--line); border-radius: 50%; display: grid; place-items: center; background: transparent; cursor: pointer; }
+    .icon-button:hover { background: var(--blue-soft); }
+    .icon-button svg { width: 19px; height: 19px; }
     .dialog-body { padding: 25px; overflow-y: auto; }
     .dialog-body > p { margin: 0 0 24px; color: var(--muted); }
-    .field { margin-bottom: 19px; }
-    .field label, .field-label { display: block; margin-bottom: 7px; font: 500 12px "IBM Plex Mono", monospace; }
-    .field input, .field textarea, .field select {
+    .field { margin-bottom: 17px; }
+    .field label, .field-label { display: block; margin-bottom: 7px; font-weight: 700; font-size: 13px; }
+    .field input, .field textarea {
       width: 100%;
       border: 1px solid var(--line-strong);
-      background: var(--paper-2);
+      border-radius: 11px;
+      background: var(--white);
       color: var(--ink);
       padding: 13px 14px;
-      border-radius: 0;
       outline: none;
+      -webkit-user-select: text;
+      user-select: text;
     }
-    .field textarea { min-height: 106px; resize: vertical; }
-    .field input:focus, .field textarea:focus, .field select:focus { border-color: var(--accent); box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 22%, transparent); }
+    .field textarea { min-height: 100px; resize: vertical; }
+    .field input:focus, .field textarea:focus { border-color: var(--blue-deep); box-shadow: 0 0 0 3px color-mix(in srgb, var(--blue) 22%, transparent); }
     .radio-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
     .radio-row label { position: relative; cursor: pointer; }
     .radio-row input { position: absolute; opacity: 0; }
-    .radio-row span { display: block; border: 1px solid var(--line); padding: 12px 8px; text-align: center; font-size: 13px; }
-    .radio-row input:checked + span { border-color: var(--ink); background: var(--ink); color: var(--paper); }
-    .form-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-top: 25px; }
-    .form-actions .button { border-radius: 0; }
-    .output { display: none; }
-    .output.visible { display: block; }
-    .output pre { white-space: pre-wrap; overflow-wrap: anywhere; background: var(--paper-2); border: 1px solid var(--line); padding: 16px; font: 400 12px/1.65 "IBM Plex Mono", monospace; max-height: 290px; overflow-y: auto; }
-    .result-note { color: var(--success); font: 500 12px "IBM Plex Mono", monospace; min-height: 1.4em; }
+    .radio-row span { display: block; border: 1px solid var(--line); border-radius: 10px; padding: 11px 8px; text-align: center; font-size: 13px; }
+    .radio-row input:checked + span { border-color: var(--blue-deep); background: var(--blue-soft); color: var(--ink); font-weight: 800; }
+    .form-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-top: 23px; }
+    .form-actions .button:disabled { cursor: wait; opacity: .68; transform: none; box-shadow: 2px 2px 0 var(--blue); }
+    .micro { color: var(--muted); font: 400 11px "IBM Plex Mono", monospace; }
+    .send-status { margin: 12px 0 0; min-height: 1.5em; color: var(--danger); font: 500 12px/1.5 "IBM Plex Mono", monospace; }
+    .send-status a { color: var(--ink); text-underline-offset: 3px; }
+    .confirmation { display: none; padding: 34px 8px; text-align: center; }
+    .confirmation.visible { display: block; }
+    .confirmation svg { width: 52px; height: 52px; color: var(--success); margin-bottom: 18px; }
+    .confirmation h3 { margin: 0; font-size: clamp(28px, 5vw, 42px); line-height: 1.08; letter-spacing: -.045em; }
+    .confirmation p { margin: 14px 0 0; color: var(--muted); }
 
-    @media (max-width: 860px) {
-      .shell { width: min(100% - 28px, 680px); }
-      .nav a:not(.nav-cta) { display: none; }
-      .topbar-inner { min-height: 60px; }
-      .hero { grid-template-columns: 1fr; min-height: 0; }
-      .hero-copy { padding: 58px 0 48px; }
-      .hero-visual { border-left: 0; border-top: 1px solid var(--line); padding: 42px 10px 55px 0; }
-      .turnaround { right: 0; top: 14px; }
-      .section-grid { grid-template-columns: 1fr; }
-      .section-label { padding: 42px 0 12px; }
-      .section-body { border-left: 0; padding: 0 0 58px; }
-      .process-wrap { grid-template-columns: 1fr; }
-      .step { min-height: 170px; border-right: 1px solid var(--line); border-bottom: 0; }
-      .step:last-child { border-bottom: 1px solid var(--line); }
-      .outcome { grid-template-columns: 125px 1fr; }
-      .price-panel { grid-template-columns: 1fr; }
-      .closing { grid-template-columns: 1fr; padding: 64px 0 76px; }
-      .closing .button { width: 100%; }
+    @media (max-width: 900px) {
+      .nav a:nth-child(-n+5) { display: none; }
+      .hero { grid-template-columns: 1fr; gap: 32px; padding: 72px 0 82px; }
+      .hero-art { min-height: 480px; }
+      .works-wrap { grid-template-columns: 1fr; gap: 38px; }
+      .side-heading { position: static; }
+      .feature-panel:nth-child(2), .feature-panel:nth-child(3) { margin: 0; }
+      .portfolio-grid { grid-template-columns: 1fr; }
+      .project-shot { min-height: 280px; }
+      .project-window { height: 235px; }
+      .price-card { grid-template-columns: 1fr; }
+      .price-list { border-left: 0; border-top: 2px dashed var(--line); }
+      .scope-grid { grid-template-columns: 1fr; }
+      .faq-wrap { grid-template-columns: 1fr; gap: 34px; }
+      .closing-inner { grid-template-columns: 1fr; }
+      .contact-block { max-width: 340px; }
     }
-    @media (max-width: 560px) {
-      .shell { width: calc(100% - 24px); }
-      .availability { font-size: 10px; }
-      .nav .nav-cta { padding: 9px 11px; font-size: 12px; }
-      h1 { font-size: clamp(49px, 16vw, 72px); }
-      .hero-copy > p { font-size: 17px; }
-      .actions { align-items: stretch; flex-direction: column; }
-      .actions .button { width: 100%; }
-      .micro { text-align: center; }
-      .hero-visual { padding-left: 0; }
-      .browser { box-shadow: 8px 8px 0 var(--accent); }
-      .mock { grid-template-columns: 1fr; min-height: 350px; padding: 28px 22px; }
-      .mock-art { min-height: 145px; }
-      .mock-title { font-size: 37px; }
-      .mock-lines, .mock-button { display: none; }
-      .turnaround { font-size: 10px; }
-      .section-label { font-size: 11px; }
-      .deliverable { grid-template-columns: 34px 1fr; }
-      .status { grid-column: 2; width: fit-content; }
-      .outcome { grid-template-columns: 1fr; gap: 8px; padding: 24px 20px; }
-      .next-step { grid-template-columns: 34px 1fr; align-items: start; }
-      .next-time { grid-column: 2; }
-      .next-action { align-items: stretch; flex-direction: column; }
-      .next-action .button { width: 100%; }
-      .price-main, .price-details { padding: 27px 22px; }
-      .price { font-size: 76px; }
-      .fit-grid { grid-template-columns: 1fr; }
+    @media (max-width: 640px) {
+      .shell { width: calc(100% - 28px); }
+      .section { padding: 72px 0; }
+      .header-inner { min-height: 62px; gap: 12px; }
+      .wordmark { font-size: 19px; }
+      .nav { gap: 10px; }
+      .nav a { display: none !important; }
+      .header-cta { min-height: 38px; padding: 0 13px; font-size: 12px; white-space: nowrap; }
+      .hero { min-height: 0; padding-top: 58px; }
+      .hero h1 { font-size: clamp(50px, 15.6vw, 70px); }
+      .button-row { align-items: stretch; flex-direction: column; }
+      .button-row .button { width: 100%; }
+      .hero-art { min-height: 390px; }
+      .hero-card { inset: 38px 2px 38px 0; }
+      .hero-card-inner { padding: 24px 20px; grid-template-columns: 1fr; }
+      .mini-art { min-height: 130px; }
+      .mini-lines, .mini-button { display: none; }
+      .sticky-note { width: 128px; padding: 15px 13px; font-size: 11px; right: -2px; }
+      .sketch-arrow { width: 110px; height: 70px; }
+      .strip-inner { justify-content: center; flex-wrap: wrap; gap: 8px 14px; padding: 11px 0; text-align: center; font-size: 12px; }
+      .works-wrap { gap: 30px; }
+      .feature-panel { grid-template-columns: 1fr; gap: 19px; padding: 24px; }
+      .feature-icon { width: 68px; height: 68px; }
+      .feature-icon svg { width: 34px; height: 34px; }
+      .process-grid { grid-template-columns: 1fr; gap: 6px; }
+      .process-step { min-height: 0; padding-bottom: 38px; padding-left: 82px; }
+      .process-step .number { position: absolute; left: 0; top: 18px; }
+      .process-step h3 { margin-top: 18px; }
+      .process-step + .process-step::before { width: 2px; height: 44px; left: 31px; top: -25px; border-top: 0; border-left: 2px dashed var(--blue); transform: none; }
+      .process-step + .process-step::after { left: 26px; top: 12px; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 9px solid var(--blue); border-bottom: 0; transform: none; }
+      .project-shot { min-height: 220px; }
+      .project-window { height: 175px; }
+      .price-copy, .price-list { padding: 29px 23px; }
+      .price-copy .button { width: 100%; }
       .radio-row { grid-template-columns: 1fr; }
-      footer { flex-direction: column; }
-      dialog { box-shadow: 6px 6px 0 var(--accent); }
-      .dialog-head { padding: 17px; }
-      .dialog-body { padding: 18px; }
+      .dialog-head { padding: 17px 18px; }
+      .dialog-head h2 { font-size: 23px; }
+      .dialog-body { padding: 20px 18px; }
       .form-actions { align-items: stretch; flex-direction: column; }
       .form-actions .button { width: 100%; }
+      .micro { text-align: center; }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      *, *::before, *::after { transition-duration: .01ms !important; }
     }
   </style>
 </head>
-<body>
-  <header class="topbar">
-    <div class="shell topbar-inner">
-      <div class="availability">Limited project availability</div>
+<body id="top">
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="wordmark" href="#top" aria-label="PageCraft home">Page<em>Craft</em></a>
       <nav class="nav" aria-label="Primary navigation">
-        <a href="#included">What you get</a>
+        <a href="#work">Work</a>
+        <a href="#services">Services</a>
         <a href="#process">Process</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#next">What next</a>
-        <button class="nav-cta open-planner" type="button">Get started</button>
+        <a href="#about">Pricing</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+        <button class="header-cta open-project" type="button">Start a Project</button>
       </nav>
     </div>
   </header>
 
   <main>
-    <div class="shell hero">
+    <section class="shell hero" aria-labelledby="hero-title">
       <div class="hero-copy">
-        <div class="eyebrow">ONE PAGE / ONE PRICE / 48 HOURS</div>
-        <h1>A better website. By Monday.</h1>
-        <p>Conversion-focused landing pages for small businesses that need to look credible, explain the offer, and turn visits into enquiries.</p>
-        <div class="actions">
-          <button class="button open-planner" type="button">
-            Tell us about your business
-            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.8"/></svg>
-          </button>
-          <a class="button secondary" href="#pricing">See the $349 CAD package</a>
-          <span class="micro">No call or technical setup needed</span>
+        <p class="hero-note">Landing pages for small businesses</p>
+        <h1 id="hero-title">We build clear websites. <span>Fast.</span></h1>
+        <p>A custom, mobile-ready landing page that explains your offer, guides visitors to one next step, and gives your business a professional place to send people.</p>
+        <div class="button-row">
+          <button class="button open-project" type="button">Book a project <i data-lucide="arrow-right" aria-hidden="true"></i></button>
+          <a class="button secondary" href="#work">View our work <i data-lucide="corner-right-down" aria-hidden="true"></i></a>
         </div>
       </div>
-      <div class="hero-visual" aria-label="Example landing page layout">
-        <div class="turnaround">DELIVERY / 48H</div>
-        <div class="browser" aria-hidden="true">
-          <div class="browser-chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url-line"></span></div>
-          <div class="mock">
+
+      <div class="hero-art" aria-label="Sketch of a landing page being planned and designed">
+        <svg class="sketch-arrow" viewBox="0 0 150 92" aria-hidden="true"><path d="M7 78C34 25 84 15 132 36"/><polygon points="130,28 146,39 128,45"/></svg>
+        <div class="dot-motif" aria-hidden="true"></div>
+        <div class="hero-card" aria-hidden="true">
+          <div class="hero-card-top"><span></span><span></span><span></span></div>
+          <div class="hero-card-inner">
             <div>
-              <div class="mock-kicker"></div>
-              <div class="mock-title">Clear offer.<br>Strong first<br>impression.</div>
-              <div class="mock-lines"><span></span><span></span></div>
-              <div class="mock-button"></div>
+              <div class="mini-label"></div>
+              <div class="mini-title">One offer.<br />Easy to get.</div>
+              <div class="mini-lines"><span></span><span></span></div>
+              <div class="mini-button"></div>
             </div>
-            <div class="mock-art"><span class="mock-stamp">READY TO SELL</span></div>
+            <div class="mini-art"></div>
           </div>
         </div>
+        <div class="sticky-note">48h first draft<br />2 revision rounds<br />launch-ready handoff</div>
       </div>
+    </section>
+
+    <div class="strip" aria-label="Service summary">
+      <div class="shell strip-inner"><span>$349 CAD fixed price</span><span class="strip-divider" aria-hidden="true"></span><span>48-hour first draft</span><span class="strip-divider" aria-hidden="true"></span><span>Two revision rounds</span></div>
     </div>
 
-    <div class="marquee" aria-hidden="true">
-      <div class="marquee-track">
-        <span>Strategy <b>✦</b></span><span>Copy <b>✦</b></span><span>Design <b>✦</b></span><span>Mobile build <b>✦</b></span><span>Launch support <b>✦</b></span>
-        <span>Strategy <b>✦</b></span><span>Copy <b>✦</b></span><span>Design <b>✦</b></span><span>Mobile build <b>✦</b></span><span>Launch support <b>✦</b></span>
-      </div>
-    </div>
-
-    <section id="included">
-      <div class="shell section-grid">
-        <div class="section-label">01 / THE DELIVERABLE</div>
-        <div class="section-body">
-          <h2>Everything needed to make one offer obvious.</h2>
-          <p class="section-lead">Not a template swap. A focused page built around what you sell, who it is for, and the next action a visitor should take.</p>
-          <div class="deliverables">
-            <article class="deliverable">
-              <span class="num">01</span>
-              <div><h3>Offer positioning</h3><p>A clear headline, value proposition, and page structure before the visuals start.</p></div>
-              <span class="status">INCLUDED</span>
-            </article>
-            <article class="deliverable">
-              <span class="num">02</span>
-              <div><h3>Original copy + design</h3><p>Concise copy, visual direction, and a responsive build shaped around your business.</p></div>
-              <span class="status">INCLUDED</span>
-            </article>
-            <article class="deliverable">
-              <span class="num">03</span>
-              <div><h3>Mobile-first build</h3><p>Fast, accessible, and tested for the phones your customers actually use.</p></div>
-              <span class="status">INCLUDED</span>
-            </article>
-            <article class="deliverable">
-              <span class="num">04</span>
-              <div><h3>Two revision rounds</h3><p>Two focused passes to tighten the details after you review the first version.</p></div>
-              <span class="status">INCLUDED</span>
-            </article>
-          </div>
+    <section class="section" id="services">
+      <div class="shell works-wrap">
+        <div class="side-heading">
+          <p class="section-kicker">What we do</p>
+          <h2 class="section-title">Everything needed for one strong page.</h2>
+          <p class="section-lead">The message, design, and responsive build are handled together, so the finished page feels consistent from top to bottom.</p>
+        </div>
+        <div class="feature-stack">
+          <article class="feature-panel">
+            <div class="feature-icon"><i data-lucide="panel-top" aria-hidden="true"></i></div>
+            <div><h3>Offer structure</h3><p>We organize your service, proof, pricing, and call to action so visitors can understand the business without hunting for answers.</p></div>
+          </article>
+          <article class="feature-panel">
+            <div class="feature-icon"><i data-lucide="message-square-text" aria-hidden="true"></i></div>
+            <div><h3>Copy and visual design</h3><p>Clear headlines, useful supporting copy, and a custom visual direction that fits your offer instead of a generic template.</p></div>
+          </article>
+          <article class="feature-panel">
+            <div class="feature-icon"><i data-lucide="rocket" aria-hidden="true"></i></div>
+            <div><h3>Responsive build</h3><p>A working page for phone, tablet, and desktop, with launch-ready files and a practical handoff at the end.</p></div>
+          </article>
         </div>
       </div>
     </section>
 
-    <section id="process">
-      <div class="shell section-grid">
-        <div class="section-label">02 / HOW IT WORKS</div>
-        <div class="section-body">
-          <h2>Tell us the basics. We handle the rest.</h2>
-          <p class="section-lead">No website knowledge needed. Answer a few plain questions about your business, then we turn those answers into the page.</p>
-          <div class="process-wrap">
-            <article class="step"><span class="step-mark">DAY 01 / AM</span><h3>Tell us about the business</h3><p>Share what you sell, who your customers are, and what you want the page to achieve.</p></article>
-            <article class="step"><span class="step-mark">DAY 01–02</span><h3>We build</h3><p>Messaging, visual direction, responsive layout, and front-end build happen together.</p></article>
-            <article class="step"><span class="step-mark">DAY 02 / PM</span><h3>Review + launch</h3><p>You get the page, request up to two revision rounds, and receive the final launch-ready files.</p></article>
-          </div>
+    <section class="section process-section" id="process">
+      <div class="shell">
+        <p class="section-kicker">Simple process</p>
+        <h2 class="section-title">Three steps. No agency maze.</h2>
+        <p class="section-lead">A short brief gets us aligned, then we move from idea to working page without the usual drag.</p>
+        <div class="process-grid">
+          <article class="process-step"><div class="number">01</div><h3>Share your idea</h3><p>Tell us what you sell, who it is for, and what visitors should do next.</p></article>
+          <article class="process-step"><div class="number">02</div><h3>We design &amp; build</h3><p>We shape the message, visual direction, and responsive page together.</p></article>
+          <article class="process-step"><div class="number">03</div><h3>Launch &amp; grow</h3><p>Review the first pass, use your revision rounds, and ship the final page.</p></article>
         </div>
       </div>
     </section>
 
-    <section id="outcomes">
-      <div class="shell section-grid">
-        <div class="section-label">03 / WHAT CHANGES</div>
-        <div class="section-body">
-          <h2>Less explaining. More confident clicks.</h2>
-          <p class="section-lead">The page has one job: help the right visitor understand the offer and take the next step without hunting for answers.</p>
-          <div class="outcomes">
-            <article class="outcome">
-              <span class="outcome-tag">MESSAGE</span>
-              <div><h3>Lead with the offer, not a generic welcome.</h3><p>Visitors see what you do, who it helps, and why it matters before they scroll.</p></div>
-            </article>
-            <article class="outcome">
-              <span class="outcome-tag">DECISION</span>
-              <div><h3>Answer the questions that block action.</h3><p>Scope, process, fit, proof, and common objections appear in a deliberate order.</p></div>
-            </article>
-            <article class="outcome">
-              <span class="outcome-tag">ACTION</span>
-              <div><h3>Give every visit a clear destination.</h3><p>Calls to action stay visible, specific, and connected to the result you want.</p></div>
-            </article>
-          </div>
+    <section class="section portfolio-section" id="work">
+      <div class="shell">
+        <p class="section-kicker">Example directions</p>
+        <h2 class="section-title">Built around the action your business needs.</h2>
+        <p class="section-lead">The layout changes with the job: explain a service, promote an event, or turn interest in an offer into a clear enquiry.</p>
+        <div class="portfolio-grid">
+          <article class="project-card">
+            <div class="project-shot" aria-hidden="true"><div class="project-window"><div class="project-bar"></div><div class="project-layout"><div class="project-copy"><strong></strong><span></span><span></span></div><div class="project-art"></div></div></div></div>
+            <div class="project-info"><h3>Consulting Service</h3><div class="metric"><i data-lucide="calendar-check" aria-hidden="true"></i> BOOK A CALL</div><p class="sample-note">Position the expertise, service, and next step on one focused page.</p></div>
+          </article>
+          <article class="project-card">
+            <div class="project-shot" aria-hidden="true"><div class="project-window"><div class="project-bar"></div><div class="project-layout"><div class="project-copy"><strong></strong><span></span><span></span></div><div class="project-art"></div></div></div></div>
+            <div class="project-info"><h3>Local Business</h3><div class="metric"><i data-lucide="file-text" aria-hidden="true"></i> REQUEST A QUOTE</div><p class="sample-note">Show the offer, service area, proof, and contact path clearly.</p></div>
+          </article>
+          <article class="project-card">
+            <div class="project-shot" aria-hidden="true"><div class="project-window"><div class="project-bar"></div><div class="project-layout"><div class="project-copy"><strong></strong><span></span><span></span></div><div class="project-art"></div></div></div></div>
+            <div class="project-info"><h3>Digital Offer</h3><div class="metric"><i data-lucide="shopping-bag" aria-hidden="true"></i> BUY ONE OFFER</div><p class="sample-note">Explain one product or package and send visitors to checkout.</p></div>
+          </article>
         </div>
       </div>
     </section>
 
-    <section id="pricing">
-      <div class="shell section-grid">
-        <div class="section-label">04 / SIMPLE PRICING</div>
-        <div class="section-body">
-          <h2>One focused package. No mystery quote.</h2>
-          <div class="price-panel">
-            <div class="price-main">
-              <div class="mono">LANDING PAGE SPRINT</div>
-              <div class="price">$349</div>
-              <div class="price-note">CAD · one-time · fixed scope</div>
-            </div>
-            <div class="price-details">
-              <ul>
-                <li>One custom landing page</li>
-                <li>Copy, design, and responsive build</li>
-                <li>Two revision rounds</li>
-                <li>48-hour first delivery</li>
-                <li>Launch-ready source files</li>
-              </ul>
-              <button class="button open-planner" type="button">Tell us about your business</button>
-            </div>
+    <section class="section" id="about">
+      <div class="shell">
+        <p class="section-kicker">One clear package</p>
+        <h2 class="section-title">A practical first website, minus the long proposal.</h2>
+        <div class="price-card">
+          <div class="price-copy">
+            <div class="price-eyebrow">LANDING PAGE SPRINT</div>
+            <div class="price">$349</div>
+            <div class="price-note">CAD · one time · fixed scope</div>
+            <button class="button open-project" type="button">Book a project <i data-lucide="arrow-up-right" aria-hidden="true"></i></button>
           </div>
-          <div class="fit-grid">
-            <article class="fit good">
-              <h3>A good fit if you need…</h3>
-              <ul><li>A credible home for one clear offer</li><li>A campaign or waitlist page</li><li>A cleaner alternative to a link-in-bio</li></ul>
-            </article>
-            <article class="fit bad">
-              <h3>Not the right fit for…</h3>
-              <ul><li>Online stores or member accounts</li><li>Large multi-page websites</li><li>Complex dashboards or web apps</li></ul>
-            </article>
-          </div>
+          <ul class="price-list">
+            <li><i data-lucide="check" aria-hidden="true"></i><span>One focused, custom landing page</span></li>
+            <li><i data-lucide="check" aria-hidden="true"></i><span>Page structure, copy editing, and visual design</span></li>
+            <li><i data-lucide="check" aria-hidden="true"></i><span>Mobile-first responsive build</span></li>
+            <li><i data-lucide="check" aria-hidden="true"></i><span>Two revision rounds</span></li>
+            <li><i data-lucide="check" aria-hidden="true"></i><span>Launch-ready files</span></li>
+            <li><i data-lucide="check" aria-hidden="true"></i><span>First draft within 48 hours after we receive your content</span></li>
+          </ul>
+        </div>
+        <div class="scope-grid" aria-label="Package details">
+          <article class="scope-card">
+            <div class="scope-icon"><i data-lucide="target" aria-hidden="true"></i></div>
+            <h3>Best fit</h3>
+            <p>Businesses with one main offer and one action they want visitors to take: book, enquire, register, or buy.</p>
+          </article>
+          <article class="scope-card">
+            <div class="scope-icon"><i data-lucide="folder-input" aria-hidden="true"></i></div>
+            <h3>What you provide</h3>
+            <ul><li>Your offer and pricing</li><li>Logo, colours, and photos if available</li><li>Any proof, FAQs, or contact details to include</li></ul>
+          </article>
+          <article class="scope-card">
+            <div class="scope-icon"><i data-lucide="circle-off" aria-hidden="true"></i></div>
+            <h3>Outside the base package</h3>
+            <p>Multi-page sites, custom app features, ecommerce setup, domain or hosting fees, and ongoing maintenance are quoted separately.</p>
+          </article>
         </div>
       </div>
     </section>
 
-    <section id="next">
-      <div class="shell section-grid">
-        <div class="section-label">05 / WHAT NEXT</div>
-        <div class="section-body">
-          <h2>Starting is simple.</h2>
-          <p class="section-lead">Answer a few everyday questions. We prepare an email for you to review and send—no project brief or technical language to figure out.</p>
-          <div class="next-steps">
-            <article class="next-step">
-              <div><h3>Tell us what your business does</h3><p>Share what you sell, who usually buys it, and what you want customers to do next.</p></div>
-              <span class="next-time">ABOUT 2 MIN</span>
-            </article>
-            <article class="next-step">
-              <div><h3>Review the ready-to-send email</h3><p>Your answers are arranged into a clear message addressed to Pagecraft Studio.</p></div>
-              <span class="next-time">INSTANT</span>
-            </article>
-            <article class="next-step">
-              <div><h3>Send it from your email app</h3><p>Check the message, add anything you missed, and press send when you are comfortable.</p></div>
-              <span class="next-time">YOU DECIDE</span>
-            </article>
-          </div>
-          <div class="next-action">
-            <button class="button open-planner" type="button">Tell us about your business <span aria-hidden="true">→</span></button>
-            <span class="micro">Nothing sends until you review the email</span>
-          </div>
+    <section class="section" id="faq">
+      <div class="shell faq-wrap">
+        <div>
+          <p class="section-kicker">Before you book</p>
+          <h2 class="section-title">Straight answers.</h2>
+          <p class="section-lead">The scope is intentionally small so the work can move quickly.</p>
+        </div>
+        <div class="faq-list">
+          <article class="faq-item"><h3>Is this a full website?</h3><p>It is one custom landing page. That is usually enough for a focused service, launch, event, waitlist, or product offer. Larger sites need a separate scope.</p></article>
+          <article class="faq-item"><h3>What does the 48-hour timeline cover?</h3><p>Your first working draft arrives within 48 hours after we have the content and assets needed to begin. Your feedback and the two revision rounds happen after that.</p></article>
+          <article class="faq-item"><h3>Do I need finished copy?</h3><p>No. Send the facts about your business and offer. We will organize and edit the wording for the page; deeper brand strategy or long-form copy is outside this package.</p></article>
+          <article class="faq-item"><h3>Can you match my current brand?</h3><p>Yes. If you have a logo, colours, type choices, or reference sites, include them in the project details. If not, we will establish a clean direction for the page.</p></article>
+          <article class="faq-item"><h3>What happens when I submit the form?</h3><p>Your answers go to PageCraft Studio. We will review the fit and reply by email with the next step before work begins.</p></article>
         </div>
       </div>
     </section>
 
-    <section>
-      <div class="shell section-grid">
-        <div class="section-label">06 / QUESTIONS</div>
-        <div class="section-body">
-          <h2>Before you start.</h2>
-          <div class="faq">
-            <details><summary>What do I need to provide?</summary><p>Your business name, offer, target customer, preferred call to action, and any proof or visuals you already have. If your copy is rough, that is fine—we shape it.</p></details>
-            <details><summary>Does 48 hours include revisions?</summary><p>The first complete version is delivered within 48 hours after your answers and project materials are received. The two revision rounds follow your review.</p></details>
-            <details><summary>What counts as one page?</summary><p>A focused, scrolling landing page with the sections needed to explain and sell one offer. Extra pages, stores, login systems, and custom app features are outside this package.</p></details>
-            <details><summary>Can you use my existing brand?</summary><p>Yes. Existing logos, colors, fonts, and photography can guide the page. If you have no established brand, the page gets a clean visual direction without turning the project into a full identity package.</p></details>
-            <details><summary>Do I need a domain or hosting first?</summary><p>No. The page can be built before those are set up. Domain, hosting, and paid third-party services are separate from the fixed sprint price unless they are added to the agreed scope.</p></details>
-            <details><summary>Can the page change after launch?</summary><p>Yes. You receive the source files, so future copy, pricing, and visual updates are possible. Ongoing maintenance is not required or included in the sprint.</p></details>
-          </div>
+    <section class="closing" id="contact">
+      <div class="shell closing-inner">
+        <div>
+          <p class="section-kicker">The PageCraft standard</p>
+          <blockquote>“Clear scope, quick turnaround, and a page ready to ship.”</blockquote>
+          <cite>A simple working promise—not an invented client quote.</cite>
+        </div>
+        <div class="contact-block">
+          <button class="button open-project" type="button">Start a project <i data-lucide="send" aria-hidden="true"></i></button>
+          <a class="contact-link" href="mailto:hellopagecraftstudio@gmail.com">hellopagecraftstudio@gmail.com</a>
         </div>
       </div>
+      <div class="blob" aria-hidden="true"></div>
     </section>
-
-    <div class="shell closing">
-      <div>
-        <h2>Stop sending customers to a page you have to explain.</h2>
-        <p>Tell us about your business in plain English. We will use your answers to shape the right page.</p>
-      </div>
-      <div class="closing-actions">
-        <button class="button open-planner" type="button">Get started <span aria-hidden="true">→</span></button>
-        <a class="contact-email" href="mailto:hellopagecraftstudio@gmail.com?subject=Landing%20page%20project">hellopagecraftstudio@gmail.com</a>
-      </div>
-    </div>
   </main>
 
-  <footer class="shell">
-    <span>48-HOUR LANDING PAGE SPRINT</span>
-    <span>ONE OFFER. ONE PAGE. ONE PRICE.</span>
+  <footer>
+    <div class="shell footer-inner"><span>PAGECRAFT STUDIO</span><span>ONE OFFER · ONE PAGE · 48 HOURS</span></div>
   </footer>
 
-  <dialog id="planner" aria-labelledby="planner-title">
+  <dialog id="project-dialog" aria-labelledby="dialog-title">
     <div class="dialog-head">
-      <h2 id="planner-title">Tell us about your business</h2>
-      <button class="close" type="button" aria-label="Close form">×</button>
+      <h2 id="dialog-title">Start a project</h2>
+      <button class="icon-button close-dialog" type="button" aria-label="Close project form" title="Close"><i data-lucide="x" aria-hidden="true"></i></button>
     </div>
     <div class="dialog-body">
-      <form id="brief-form">
-        <p>Answer these in your own words. We will turn your answers into a clear email for you to review before anything is sent.</p>
+      <form id="project-form">
+        <p>Tell us the basics. Your answers go straight to PageCraft Studio.</p>
+        <div class="field"><label for="business">Business name</label><input id="business" name="business" type="text" autocomplete="organization" required /></div>
+        <div class="field"><label for="email">Email for our reply</label><input id="email" name="email" type="email" autocomplete="email" required /></div>
+        <div class="field"><label for="website">Current website <span class="micro">Optional</span></label><input id="website" name="website" type="url" inputmode="url" placeholder="https://" /></div>
+        <div class="field"><label for="offer">What do you sell?</label><input id="offer" name="offer" type="text" required /></div>
         <div class="field">
-          <label for="business">What is your business called?</label>
-          <input id="business" name="business" type="text" autocomplete="organization" required placeholder="e.g. Lakeshore Window Cleaning" />
-        </div>
-        <div class="field">
-          <label for="offer">What do you sell or help people with?</label>
-          <input id="offer" name="offer" type="text" required placeholder="e.g. Residential window cleaning" />
-        </div>
-        <div class="field">
-          <span class="field-label">What should visitors do on the new page?</span>
+          <span class="field-label">What should visitors do?</span>
           <div class="radio-row">
             <label><input type="radio" name="goal" value="Book a call" checked /><span>Book a call</span></label>
             <label><input type="radio" name="goal" value="Request a quote" /><span>Request a quote</span></label>
             <label><input type="radio" name="goal" value="Buy one offer" /><span>Buy an offer</span></label>
           </div>
         </div>
+        <div class="field"><label for="audience">Who are your usual customers?</label><input id="audience" name="audience" type="text" required /></div>
         <div class="field">
-          <label for="audience">Who are your usual customers?</label>
-          <input id="audience" name="audience" type="text" required placeholder="e.g. Homeowners in west Toronto" />
+          <span class="field-label">When do you want to launch?</span>
+          <div class="radio-row">
+            <label><input type="radio" name="timeline" value="As soon as possible" checked /><span>As soon as possible</span></label>
+            <label><input type="radio" name="timeline" value="Within two weeks" /><span>Within two weeks</span></label>
+            <label><input type="radio" name="timeline" value="Flexible" /><span>Flexible</span></label>
+          </div>
         </div>
-        <div class="field">
-          <label for="notes">Anything else we should know? <span style="color:var(--muted)">(optional)</span></label>
-          <textarea id="notes" name="notes" placeholder="A website link, reviews, colours you like, or anything important"></textarea>
-        </div>
-        <div class="form-actions">
-          <button class="button" type="submit">Review my message</button>
-          <span class="micro">Nothing is sent automatically</span>
-        </div>
+        <div class="field"><label for="notes">Anything else we should know? <span class="micro">Optional</span></label><textarea id="notes" name="notes" placeholder="Useful links, style references, deadline details, or questions"></textarea></div>
+        <div class="form-actions"><button class="button" id="send-project" type="submit">Send to PageCraft <i data-lucide="send" aria-hidden="true"></i></button><span class="micro">Sent directly to our inbox</span></div>
+        <p class="send-status" id="send-status" aria-live="polite"></p>
       </form>
-      <div class="output" id="output">
-        <p>Your message is ready. Check it below, then open it in your email app.</p>
-        <pre id="brief-text"></pre>
-        <div class="form-actions">
-          <a class="button" id="email-brief" href="mailto:hellopagecraftstudio@gmail.com">Open email to Pagecraft</a>
-          <button class="button secondary" id="copy-brief" type="button">Copy message</button>
-          <button class="button secondary" id="edit-brief" type="button">Change my answers</button>
-        </div>
-        <div class="result-note" id="result-note" aria-live="polite"></div>
-      </div>
+      <div class="confirmation" id="confirmation" tabindex="-1"><i data-lucide="circle-check-big" aria-hidden="true"></i><h3>Thanks — we'll get back to you within one business day.</h3><p>Your project details have been sent.</p></div>
     </div>
   </dialog>
 
+  <script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
   <script>
     (function () {
-      var dialog = document.getElementById('planner');
-      var form = document.getElementById('brief-form');
-      var output = document.getElementById('output');
-      var briefText = document.getElementById('brief-text');
-      var note = document.getElementById('result-note');
-      var currentBrief = '';
+      if (window.lucide) window.lucide.createIcons();
 
-      document.querySelectorAll('.open-planner').forEach(function (button) {
+      var dialog = document.getElementById('project-dialog');
+      var form = document.getElementById('project-form');
+      var formEndpoint = 'https://formspree.io/f/xyezdonq';
+      var sendButton = document.getElementById('send-project');
+      var status = document.getElementById('send-status');
+      var confirmation = document.getElementById('confirmation');
+
+      document.querySelectorAll('.open-project').forEach(function (button) {
         button.addEventListener('click', function () {
           if (typeof dialog.showModal === 'function') dialog.showModal();
           else dialog.setAttribute('open', '');
         });
       });
-      document.querySelector('.close').addEventListener('click', function () { dialog.close(); });
-      dialog.addEventListener('click', function (event) {
-        if (event.target === dialog) dialog.close();
-      });
+
+      document.querySelector('.close-dialog').addEventListener('click', function () { dialog.close(); });
+      dialog.addEventListener('click', function (event) { if (event.target === dialog) dialog.close(); });
 
       form.addEventListener('submit', function (event) {
         event.preventDefault();
         var data = new FormData(form);
-        var notes = String(data.get('notes') || '').trim();
-        currentBrief = [
-          'Hi Pagecraft Studio,',
-          '',
-          'I am interested in the $349 CAD landing page package.',
-          '',
-          'My business: ' + String(data.get('business')).trim(),
-          'What we sell: ' + String(data.get('offer')).trim(),
-          'Our usual customers: ' + String(data.get('audience')).trim(),
-          'What visitors should do: ' + String(data.get('goal')).trim(),
-          '',
-          'Anything else to know:',
-          notes || 'Nothing else yet.',
-          '',
-          'Please let me know the next step.'
-        ].join('\n');
-        briefText.textContent = currentBrief;
-        document.getElementById('email-brief').href = 'mailto:hellopagecraftstudio@gmail.com?subject=' + encodeURIComponent('Landing page enquiry — ' + String(data.get('business')).trim()) + '&body=' + encodeURIComponent(currentBrief);
-        form.style.display = 'none';
-        output.classList.add('visible');
-        note.textContent = '';
-        output.scrollIntoView({ block: 'start', behavior: 'smooth' });
-      });
+        var replyEmail = String(data.get('email') || '').trim();
+        var payload = {
+          'business name': String(data.get('business') || '').trim(),
+          'email': replyEmail,
+          '_replyto': replyEmail,
+          'current website': String(data.get('website') || '').trim() || 'None provided.',
+          'what they sell': String(data.get('offer') || '').trim(),
+          'visitor goal': String(data.get('goal') || '').trim(),
+          'usual customers': String(data.get('audience') || '').trim(),
+          'preferred timeline': String(data.get('timeline') || '').trim(),
+          'anything else': String(data.get('notes') || '').trim() || 'Nothing else yet.',
+          '_subject': 'New landing page enquiry'
+        };
 
-      document.getElementById('edit-brief').addEventListener('click', function () {
-        output.classList.remove('visible');
-        form.style.display = 'block';
-        note.textContent = '';
-      });
+        sendButton.disabled = true;
+        sendButton.textContent = 'Sending…';
+        status.textContent = '';
 
-      document.getElementById('copy-brief').addEventListener('click', function () {
-        if (!navigator.clipboard) {
-          note.textContent = 'Copy is unavailable here. Use the email button instead.';
-          return;
-        }
-        navigator.clipboard.writeText(currentBrief).then(function () {
-          note.textContent = 'Message copied.';
+        fetch(formEndpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(payload)
+        }).then(function (response) {
+          if (!response.ok) throw new Error('Request failed');
+          form.style.display = 'none';
+          confirmation.classList.add('visible');
+          confirmation.focus();
         }).catch(function () {
-          note.textContent = 'Could not copy. Use the email button instead.';
+          sendButton.disabled = false;
+          sendButton.innerHTML = 'Send to PageCraft';
+          status.innerHTML = 'Something went wrong — email us directly at <a href="mailto:hellopagecraftstudio@gmail.com">hellopagecraftstudio@gmail.com</a>.';
         });
       });
     }());
