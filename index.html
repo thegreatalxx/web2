@@ -51,22 +51,34 @@
         "name": "PageCraft Studio",
         "url": "https://pagecraftstudio.vercel.app/",
         "email": "hellopagecraftstudio@gmail.com",
-        "priceRange": "$349 CAD",
+        "priceRange": "$349–$599 CAD",
         "areaServed": [
           { "@type": "City", "name": "Toronto" },
           { "@type": "AdministrativeArea", "name": "Greater Toronto Area" }
         ],
         "provider": { "@id": "https://pagecraftstudio.vercel.app/#organization" },
-        "makesOffer": {
-          "@type": "Offer",
-          "price": "349",
-          "priceCurrency": "CAD",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Custom landing page design and build",
-            "description": "One focused custom landing page with structure, copy editing, visual design, a mobile-first responsive build, two revision rounds, and a first draft within 48 hours after content is received."
+        "makesOffer": [
+          {
+            "@type": "Offer",
+            "price": "349",
+            "priceCurrency": "CAD",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Landing Page Sprint",
+              "description": "One focused custom landing page with a first draft within 48 hours and two revision rounds."
+            }
+          },
+          {
+            "@type": "Offer",
+            "price": "599",
+            "priceCurrency": "CAD",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Landing Page Plus",
+              "description": "A custom landing page with copywriting and Google Business listing setup."
+            }
           }
-        }
+        ]
       },
       {
         "@type": "FAQPage",
@@ -93,7 +105,7 @@
             "name": "Do I need finished copy?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "No. Send the facts about your business and offer. We will organize and edit the wording for the page; deeper brand strategy or long-form copy is outside this package."
+              "text": "No. With the $349 Sprint, send your draft wording and we will organize and edit it. Choose the $599 Plus package if you want the complete page copy written for you."
             }
           },
           {
@@ -500,25 +512,42 @@
     .metric svg { width: 16px; height: 16px; }
     .sample-note { margin: 13px 0 0; color: var(--muted); font-size: 12px; }
 
+    .pricing-grid { margin-top: 52px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; align-items: stretch; }
     .price-card {
-      margin-top: 52px;
-      display: grid;
-      grid-template-columns: 1.05fr .95fr;
+      display: flex;
+      flex-direction: column;
       border: 2px solid var(--ink);
       border-radius: 28px 18px 30px 16px;
       background: var(--white);
       overflow: hidden;
-      box-shadow: 10px 10px 0 var(--blue-soft);
+      box-shadow: 9px 9px 0 var(--blue-soft);
     }
-    .price-copy { padding: 42px; }
+    .price-card:nth-child(2) { border-radius: 18px 28px 17px 30px; box-shadow: 9px 9px 0 color-mix(in srgb, var(--peach) 55%, var(--paper)); }
+    .price-copy { padding: 36px 38px 31px; }
     .price-eyebrow { color: var(--blue-deep); font: 500 12px "IBM Plex Mono", monospace; letter-spacing: .06em; }
-    .price { margin: 17px 0 6px; font-size: clamp(68px, 9vw, 110px); line-height: .86; letter-spacing: -.08em; font-weight: 800; }
+    .price { margin: 17px 0 6px; font-size: clamp(62px, 7vw, 92px); line-height: .86; letter-spacing: -.08em; font-weight: 800; }
     .price-note { color: var(--muted); }
-    .price-copy .button { margin-top: 30px; }
-    .price-list { margin: 0; padding: 38px 42px; list-style: none; border-left: 2px dashed var(--line); background: var(--paper-2); }
-    .price-list li { display: flex; gap: 12px; align-items: flex-start; padding: 13px 0; border-bottom: 1px solid var(--line); }
+    .price-copy .button { margin-top: 28px; }
+    .price-list { flex: 1; margin: 0; padding: 28px 38px 32px; list-style: none; border-top: 2px dashed var(--line); background: var(--paper-2); }
+    .price-list li { display: flex; gap: 12px; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid var(--line); }
     .price-list li:last-child { border-bottom: 0; }
     .price-list svg { width: 19px; height: 19px; margin-top: 3px; color: var(--blue-deep); flex: 0 0 auto; }
+    .add-ons {
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: minmax(180px, .7fr) minmax(0, 1.3fr);
+      gap: 28px;
+      align-items: center;
+      padding: 27px 30px;
+      border: 1px solid var(--line);
+      border-radius: 16px 9px 18px 11px;
+      background: color-mix(in srgb, var(--mint) 42%, var(--white));
+    }
+    .add-ons h3 { margin: 0; font-size: 24px; letter-spacing: -.035em; }
+    .add-ons p { margin: 5px 0 0; color: var(--muted); font-size: 14px; }
+    .add-on-list { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 22px; }
+    .add-on-list li { display: flex; justify-content: space-between; gap: 16px; padding: 9px 0; border-bottom: 1px solid color-mix(in srgb, var(--line) 72%, transparent); }
+    .add-on-list strong { white-space: nowrap; color: var(--blue-deep); }
     .scope-grid { margin-top: 28px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
     .scope-card { padding: 26px; border: 1px solid var(--line); background: var(--white); }
     .scope-card:nth-child(1) { border-radius: 18px 10px 14px 8px; }
@@ -608,8 +637,8 @@
       .portfolio-grid { grid-template-columns: 1fr; }
       .project-shot { min-height: 280px; }
       .project-window { height: 235px; }
-      .price-card { grid-template-columns: 1fr; }
-      .price-list { border-left: 0; border-top: 2px dashed var(--line); }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .add-ons { grid-template-columns: 1fr; gap: 18px; }
       .scope-grid { grid-template-columns: 1fr; }
       .faq-wrap { grid-template-columns: 1fr; gap: 34px; }
       .closing-inner { grid-template-columns: 1fr; }
@@ -649,6 +678,8 @@
       .project-window { height: 175px; }
       .price-copy, .price-list { padding: 29px 23px; }
       .price-copy .button { width: 100%; }
+      .add-ons { padding: 24px 22px; }
+      .add-on-list { grid-template-columns: 1fr; }
       .radio-row { grid-template-columns: 1fr; }
       .dialog-head { padding: 17px 18px; }
       .dialog-head h2 { font-size: 23px; }
@@ -775,24 +806,45 @@
 
     <section class="section" id="pricing">
       <div class="shell">
-        <p class="section-kicker">One clear package</p>
-        <h2 class="section-title">A practical first website, minus the long proposal.</h2>
-        <div class="price-card">
-          <div class="price-copy">
-            <div class="price-eyebrow">LANDING PAGE SPRINT</div>
-            <div class="price">$349</div>
-            <div class="price-note">CAD · one time · fixed scope</div>
-            <button class="button open-project" type="button">Book a project <i data-lucide="arrow-up-right" aria-hidden="true"></i></button>
-          </div>
-          <ul class="price-list">
-            <li><i data-lucide="check" aria-hidden="true"></i><span>One focused, custom landing page</span></li>
-            <li><i data-lucide="check" aria-hidden="true"></i><span>Page structure, copy editing, and visual design</span></li>
-            <li><i data-lucide="check" aria-hidden="true"></i><span>Mobile-first responsive build</span></li>
-            <li><i data-lucide="check" aria-hidden="true"></i><span>Two revision rounds</span></li>
-            <li><i data-lucide="check" aria-hidden="true"></i><span>Launch-ready files</span></li>
-            <li><i data-lucide="check" aria-hidden="true"></i><span>First draft within 48 hours after we receive your content</span></li>
-          </ul>
+        <p class="section-kicker">Two clear packages</p>
+        <h2 class="section-title">Choose how much you want handled for you.</h2>
+        <div class="pricing-grid" aria-label="Pricing tiers">
+          <article class="price-card">
+            <div class="price-copy">
+              <div class="price-eyebrow">LANDING PAGE SPRINT</div>
+              <div class="price">$349</div>
+              <div class="price-note">CAD · one time · fixed scope</div>
+              <button class="button open-project" type="button">Choose the sprint <i data-lucide="arrow-up-right" aria-hidden="true"></i></button>
+            </div>
+            <ul class="price-list">
+              <li><i data-lucide="check" aria-hidden="true"></i><span>One focused, custom landing page</span></li>
+              <li><i data-lucide="check" aria-hidden="true"></i><span>First draft within 48 hours after we receive your content</span></li>
+              <li><i data-lucide="check" aria-hidden="true"></i><span>Two revision rounds</span></li>
+              <li><i data-lucide="check" aria-hidden="true"></i><span>Page structure, copy editing, and visual design</span></li>
+              <li><i data-lucide="check" aria-hidden="true"></i><span>Mobile-first responsive build and launch-ready files</span></li>
+            </ul>
+          </article>
+          <article class="price-card">
+            <div class="price-copy">
+              <div class="price-eyebrow">LANDING PAGE PLUS</div>
+              <div class="price">$599</div>
+              <div class="price-note">CAD · one time · more done for you</div>
+              <button class="button open-project" type="button">Choose plus <i data-lucide="arrow-up-right" aria-hidden="true"></i></button>
+            </div>
+            <ul class="price-list">
+              <li><i data-lucide="check" aria-hidden="true"></i><span>Everything in the Landing Page Sprint</span></li>
+              <li><i data-lucide="check" aria-hidden="true"></i><span>Complete page copy written for you</span></li>
+              <li><i data-lucide="check" aria-hidden="true"></i><span>Google Business listing setup</span></li>
+            </ul>
+          </article>
         </div>
+        <aside class="add-ons" aria-labelledby="add-ons-title">
+          <div><h3 id="add-ons-title">Optional add-ons</h3><p>Available with either package.</p></div>
+          <ul class="add-on-list">
+            <li><span>24-hour rush delivery</span><strong>+$100</strong></li>
+            <li><span>Monthly updates</span><strong>$49/mo</strong></li>
+          </ul>
+        </aside>
         <div class="scope-grid" aria-label="Package details">
           <article class="scope-card">
             <div class="scope-icon"><i data-lucide="target" aria-hidden="true"></i></div>
@@ -806,8 +858,8 @@
           </article>
           <article class="scope-card">
             <div class="scope-icon"><i data-lucide="circle-off" aria-hidden="true"></i></div>
-            <h3>Outside the base package</h3>
-            <p>Multi-page sites, custom app features, ecommerce setup, domain or hosting fees, and ongoing maintenance are quoted separately.</p>
+            <h3>Outside these packages</h3>
+            <p>Multi-page sites, custom app features, ecommerce setup, and domain or hosting fees need a separate scope.</p>
           </article>
         </div>
       </div>
@@ -823,7 +875,7 @@
         <div class="faq-list">
           <article class="faq-item"><h3>Is this a full website?</h3><p>It is one custom landing page. That is usually enough for a focused service, launch, event, waitlist, or product offer. Larger sites need a separate scope.</p></article>
           <article class="faq-item"><h3>What does the 48-hour timeline cover?</h3><p>Your first working draft arrives within 48 hours after we have the content and assets needed to begin. Your feedback and the two revision rounds happen after that.</p></article>
-          <article class="faq-item"><h3>Do I need finished copy?</h3><p>No. Send the facts about your business and offer. We will organize and edit the wording for the page; deeper brand strategy or long-form copy is outside this package.</p></article>
+          <article class="faq-item"><h3>Do I need finished copy?</h3><p>No. With the $349 Sprint, send your draft wording and we will organize and edit it. Choose the $599 Plus package if you want the complete page copy written for you.</p></article>
           <article class="faq-item"><h3>Can you match my current brand?</h3><p>Yes. If you have a logo, colours, type choices, or reference sites, include them in the project details. If not, we will establish a clean direction for the page.</p></article>
           <article class="faq-item"><h3>What happens when I submit the form?</h3><p>Your answers go to PageCraft Studio. We will review the fit and reply by email with the next step before work begins.</p></article>
         </div>
@@ -847,7 +899,7 @@
   </main>
 
   <footer>
-    <div class="shell footer-inner"><span>PAGECRAFT STUDIO · TORONTO &amp; GTA</span><span>ONE OFFER · ONE PAGE · 48 HOURS</span></div>
+    <div class="shell footer-inner"><span>PAGECRAFT STUDIO · TORONTO &amp; GTA</span><span>ONE PAGE · TWO PACKAGES · 48 HOURS</span></div>
   </footer>
 
   <dialog id="project-dialog" aria-labelledby="dialog-title">
